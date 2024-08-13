@@ -1,35 +1,16 @@
 #include "emulator.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 
-typedef enum opcodes
+
+
+emulator *new_emulator(void)
 {
-	BRK,
-	BPL,
-	JSR
-	//.... CONTINUE LATER
-}ops;
-
-
-typedef union machine_status
-{
-	char carry		:1;
-	char zero		:1;
-	char intdisable :1;
-	char decmode	:1;
-	char break_com	:1;
-	char overflow	:1;
-	char negative	:1;	//set of operation was negative
-	char bits;			// allow user to print the bits of the PSW in one operation
-}psw;
-
-
-typedef struct emulatorData
-{
-	unsigned short program_counter;
-	unsigned char stack_pointer;
-	unsigned char accumulator;
-	unsigned char idx_reg_x;
-	unsigned char idx_reg_y;
-	psw status;
-
-}emulator;
+	emulator* new = calloc(1, sizeof(emulator*));
+	if(new == NULL)
+	{
+		printf("PROG FAILED WHEN ALLOCATING NEW EMULATOR\n");
+	}
+	return new;
+}
